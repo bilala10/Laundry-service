@@ -1,28 +1,43 @@
-// src/components/SignUpStep1.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import './SignUpStep1.css';
 
-const SignUpStep1 = ({ setUser }) => {
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleNext = () => {
-    setUser(formData);
-    navigate('/signup-step-2');
-  };
-
+const SignUpStep1 = ({ formData, setFormData, nextStep }) => {
   return (
-    <div>
-      <h2>Step 1/3: Enter Your Details</h2>
-      <input name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
-      <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" />
-      <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
-      <button onClick={handleNext}>Next</button>
+    <div className="signup-step-container">
+      <h2>Let's get started!</h2>
+      <div className="form-group">
+        <input 
+          type="text" 
+          placeholder="First name" 
+          value={formData.firstName} 
+          onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} 
+        />
+        <input 
+          type="text" 
+          placeholder="Last name" 
+          value={formData.lastName} 
+          onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} 
+        />
+        <input 
+          type="text" 
+          placeholder="Phone number" 
+          value={formData.phoneNumber} 
+          onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} 
+        />
+        <input 
+          type="email" 
+          placeholder="Email" 
+          value={formData.email} 
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+        />
+        <input 
+          type="password" 
+          placeholder="Create password" 
+          value={formData.password} 
+          onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
+        />
+      </div>
+      <button className="next-btn" onClick={nextStep}>Continue</button>
     </div>
   );
 };
