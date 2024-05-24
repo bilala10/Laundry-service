@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -8,7 +9,6 @@ import OrderForm from './components/OrderForm';
 import PaymentMethods from './components/PaymentMethods';
 import Preferences from './components/Preferences';
 import Subscription from './components/Subscription';
-import SignUp from './components/SignUp';
 import './App.css';
 
 const App = () => {
@@ -25,7 +25,6 @@ const App = () => {
             <Route path="/preferences" element={<Preferences />} />
             <Route path="/subscription" element={<Subscription />} />
             <Route path="/account" element={<Account />} />
-            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </div>
       </div>

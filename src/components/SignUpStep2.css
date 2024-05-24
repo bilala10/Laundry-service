@@ -1,46 +1,45 @@
 .signup-step-container {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group input {
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .prev-btn,
-  .next-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #f90;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .prev-btn:hover,
-  .next-btn:hover {
-    background-color: #e80;
-  }
-  
-  .prev-btn {
-    background-color: #555;
-  }
-  
-  .prev-btn:hover {
-    background-color: #333;
-  }
-  
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.prev-btn,
+.next-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #f90;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  background-color: #e80;
+}
+
+.prev-btn {
+  background-color: #555;
+}
+
+.prev-btn:hover {
+  background-color: #333;
+}
