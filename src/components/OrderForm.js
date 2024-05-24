@@ -4,7 +4,7 @@ import './OrderForm.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { checkPaymentMethod, addPaymentMethod, confirmPickup } from '../api'; // Import the API functions
+import { checkPaymentMethod, addPaymentMethod, confirmPickup } from '../api';
 
 const OrderForm = () => {
   const [selectedServices, setSelectedServices] = useState([]);
@@ -15,7 +15,6 @@ const OrderForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  // Check for existing payment method
   useEffect(() => {
     const fetchPaymentMethod = async () => {
       try {
@@ -116,7 +115,7 @@ const OrderForm = () => {
         ))}
 
         <h2>Choose your pickup date:</h2>
-        <div>
+        <div className="pickup-dates">
           {['Tonight', 'Tomorrow', 'Sat', 'Other'].map((label, index) => (
             <button
               key={index}
@@ -154,12 +153,12 @@ const OrderForm = () => {
         </div>
 
         {!showPaymentForm ? (
-          <button onClick={handleContinueClick}>Continue</button>
+          <button className="continue-btn" onClick={handleContinueClick}>Continue</button>
         ) : (
           <form onSubmit={handlePaymentSubmit}>
             <h2>Add Payment Method</h2>
             <CardElement />
-            <button type="submit">Confirm Pickup</button>
+            <button className="continue-btn" type="submit">Confirm Pickup</button>
           </form>
         )}
       </div>
