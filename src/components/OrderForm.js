@@ -1,10 +1,10 @@
 // src/components/OrderForm.js
 import React, { useState, useEffect } from 'react';
+import API from '../api';
 import './OrderForm.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { checkPaymentMethod, addPaymentMethod, confirmPickup } from '../api';
 
 const OrderForm = () => {
   const [selectedServices, setSelectedServices] = useState([]);
@@ -15,11 +15,12 @@ const OrderForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  // Check for existing payment method
   useEffect(() => {
     const fetchPaymentMethod = async () => {
       try {
-        const paymentMethodExists = await checkPaymentMethod();
-        setHasPaymentMethod(paymentMethodExists);
+        const response = await API.get('/check-payment-method');
+        setHasPaymentMethod(response.data);
       } catch (error) {
         console.error('Error fetching payment method', error);
       }
@@ -72,7 +73,7 @@ const OrderForm = () => {
       console.log('[error]', error);
     } else {
       try {
-        await addPaymentMethod(paymentMethod);
+        await API.post('/add-payment-method', paymentMethod);
         setHasPaymentMethod(true);
         setShowPaymentForm(false);
         handleConfirmPickup();
@@ -89,7 +90,7 @@ const OrderForm = () => {
     };
 
     try {
-      await confirmPickup(orderDetails);
+      await API.post('/confirm-pickup', orderDetails);
       alert('Pickup Confirmed');
     } catch (error) {
       console.error('Error confirming pickup', error);
@@ -115,7 +116,7 @@ const OrderForm = () => {
         ))}
 
         <h2>Choose your pickup date:</h2>
-        <div className="pickup-dates">
+        <div>
           {['Tonight', 'Tomorrow', 'Sat', 'Other'].map((label, index) => (
             <button
               key={index}
@@ -153,12 +154,12 @@ const OrderForm = () => {
         </div>
 
         {!showPaymentForm ? (
-          <button className="continue-btn" onClick={handleContinueClick}>Continue</button>
+          <button onClick={handleContinueClick}>Continue</button>
         ) : (
           <form onSubmit={handlePaymentSubmit}>
             <h2>Add Payment Method</h2>
             <CardElement />
-            <button className="continue-btn" type="submit">Confirm Pickup</button>
+            <button type="submit">Confirm Pickup</button>
           </form>
         )}
       </div>

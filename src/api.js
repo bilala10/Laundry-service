@@ -1,11 +1,24 @@
 // src/api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5002'; // Ensure this is the correct URL for your backend
+const API = axios.create({
+  baseURL: 'http://localhost:5002/api', // Ensure this is the correct URL for your backend
+});
+
+// Add a request interceptor to include the token in headers
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 export const checkPaymentMethod = async () => {
   try {
-    const response = await axios.get(`${API_URL}/check-payment-method`);
+    const response = await API.get('/check-payment-method');
     return response.data;
   } catch (error) {
     console.error('Error checking payment method', error);
@@ -15,7 +28,7 @@ export const checkPaymentMethod = async () => {
 
 export const addPaymentMethod = async (paymentMethod) => {
   try {
-    const response = await axios.post(`${API_URL}/add-payment-method`, paymentMethod);
+    const response = await API.post('/add-payment-method', paymentMethod);
     return response.data;
   } catch (error) {
     console.error('Error adding payment method', error);
@@ -25,10 +38,12 @@ export const addPaymentMethod = async (paymentMethod) => {
 
 export const confirmPickup = async (orderDetails) => {
   try {
-    const response = await axios.post(`${API_URL}/confirm-pickup`, orderDetails);
+    const response = await API.post('/confirm-pickup', orderDetails);
     return response.data;
   } catch (error) {
     console.error('Error confirming pickup', error);
     throw error;
   }
 };
+
+export default API;

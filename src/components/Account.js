@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// src/components/Account.js
+import React, { useState, useEffect } from 'react';
+import API from '../api'; // Import the Axios instance
 import './Account.css';
 
 const Account = () => {
@@ -12,17 +14,34 @@ const Account = () => {
     notifications: 'All'
   });
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await API.get('/users/profile');
+        setUserDetails(response.data);
+      } catch (error) {
+        console.error('Error fetching user data', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserDetails(prevState => ({
+    setUserDetails((prevState) => ({
       ...prevState,
       [name]: value
     }));
   };
 
-  const handleSave = () => {
-    // Logic to save user details
-    alert('Account details saved successfully!');
+  const handleSave = async () => {
+    try {
+      await API.put('/users/profile', userDetails);
+      alert('Account details saved successfully!');
+    } catch (error) {
+      console.error('Error updating user details', error);
+    }
   };
 
   return (
