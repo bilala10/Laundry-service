@@ -3,6 +3,7 @@ import SignUpStep1 from './SignUpStep1';
 import SignUpStep2 from './SignUpStep2';
 import SignUpStep3 from './SignUpStep3';
 import './SignUp.css';
+import axios from 'axios';
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
@@ -21,9 +22,26 @@ const SignUp = () => {
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
-  const submitForm = () => {
-    // Submit form logic here
-    alert('Order placed successfully!');
+
+  const submitForm = async () => {
+    try {
+      const response = await axios.post('http://localhost:5002/api/auth/register', {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phoneNumber,
+        address: formData.address,
+        aptNumber: formData.aptNumber,
+        instructions: formData.instructions,
+      });
+      if (response.data) {
+        alert('Order placed successfully!');
+        // Optionally, redirect to a different page or reset the form
+      }
+    } catch (error) {
+      console.error('Error submitting form', error);
+      alert('There was an error placing your order. Please try again.');
+    }
   };
 
   switch (step) {
