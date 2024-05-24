@@ -1,0 +1,116 @@
+/* App.css */
+
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Sidebar navigation */
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1a1a1a;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ddd;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #575757;
+  color: white;
+}
+
+.sidebar a.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Main content */
+.main-content {
+  margin-left: 260px;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+/* Order Form */
+.order-form {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.order-form h2 {
+  margin-top: 0;
+}
+
+.service-box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-box.selected {
+  border: 2px solid orange;
+}
+
+.service-box h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.service-box p {
+  margin: 0;
+  color: #666;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.date-button {
+  width: 80px;
+  height: 40px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.date-button.selected {
+  border: 2px solid black;
+}
+
+.order-summary {
+  margin-top: 20px;
+}

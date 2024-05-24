@@ -1,0 +1,71 @@
+/* Add this to your OrderForm.css file */
+
+.order-form {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .service-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .service-box.selected {
+    border-color: orange;
+  }
+  
+  .pickup-dates {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .pickup-dates button {
+    width: 100px;  /* Increased width to accommodate longer text */
+    height: 40px;  /* Increased height for better appearance */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .pickup-dates button.selected {
+    border: 2px solid black;
+  }
+  
+  .selected-date {
+    margin-top: 20px;
+  }
+  
+  .continue-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .continue-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .react-datepicker__day--disabled {
+    color: #ccc;
+  }
+  

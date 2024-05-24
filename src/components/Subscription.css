@@ -1,0 +1,84 @@
+.subscription {
+    padding: 20px;
+  }
+  
+  .subscription-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .subscription-type {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .subscription-type.selected {
+    border: 2px solid #007bff;
+    background-color: #f0f8ff;
+  }
+  
+  .plans {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .plan {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .plan.selected {
+    border: 2px solid #007bff;
+    background-color: #f0f8ff;
+  }
+  
+  .billing-cycle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .cycle {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cycle.selected {
+    border: 2px solid #007bff;
+    background-color: #f0f8ff;
+  }
+  
+  .features {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .features li {
+    margin: 10px 0;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .save-button:hover {
+    background-color: #0056b3;
+  }
+  
