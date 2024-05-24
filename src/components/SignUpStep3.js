@@ -1,55 +1,42 @@
-// src/components/SignUpStep3.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Calendar from 'react-calendar';
+import React from 'react';
+import './SignUpStep3.css';
 
-const SignUpStep3 = ({ user, setUser, createOrder }) => {
-  const [formData, setFormData] = useState({ services: [], pickupDate: new Date() });
-  const navigate = useNavigate();
+const SignUpStep3 = ({ formData, setFormData, prevStep, submitForm }) => {
+  const services = [
+    { name: 'Wash & Fold', value: 'washFold' },
+    { name: 'Dry Cleaning', value: 'dryCleaning' },
+  ];
 
-  const handleServiceChange = (service) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      services: prevData.services.includes(service)
-        ? prevData.services.filter((s) => s !== service)
-        : [...prevData.services, service],
+  const handleServiceClick = (service) => {
+    setFormData((prev) => ({
+      ...prev,
+      services: prev.services.includes(service.value)
+        ? prev.services.filter((s) => s !== service.value)
+        : [...prev.services, service.value],
     }));
   };
 
-  const handleDateChange = (date) => {
-    setFormData((prevData) => ({ ...prevData, pickupDate: date }));
-  };
-
-  const handleOrder = () => {
-    setUser({ ...user, ...formData });
-    createOrder({ ...user, ...formData });
-    navigate('/order-form');
-  };
-
-  const handleBack = () => {
-    navigate('/signup-step-2');
-  };
-
   return (
-    <div>
-      <h2>Step 3/3: Select Your Services and Pickup Date</h2>
-      <div>
-        <label>
-          <input type="checkbox" onChange={() => handleServiceChange('Wash & Fold')} />
-          Wash & Fold
-        </label>
-        <label>
-          <input type="checkbox" onChange={() => handleServiceChange('Dry Cleaning')} />
-          Dry Cleaning
-        </label>
-        <label>
-          <input type="checkbox" onChange={() => handleServiceChange('Hang Dry')} />
-          Hang Dry
-        </label>
+    <div className="signup-step-container">
+      <h2>Schedule your order</h2>
+      <div className="form-group">
+        {services.map((service) => (
+          <div 
+            key={service.value} 
+            className={`service-box ${formData.services.includes(service.value) ? 'selected' : ''}`} 
+            onClick={() => handleServiceClick(service)}
+          >
+            <h3>{service.name}</h3>
+          </div>
+        ))}
+        <input 
+          type="date" 
+          value={formData.pickupDate} 
+          onChange={(e) => setFormData({ ...formData, pickupDate: e.target.value })} 
+        />
       </div>
-      <Calendar onChange={handleDateChange} value={formData.pickupDate} />
-      <button onClick={handleBack}>Back</button>
-      <button onClick={handleOrder}>Place Order</button>
+      <button className="prev-btn" onClick={prevStep}>Back</button>
+      <button className="next-btn" onClick={submitForm}>Place Order</button>
     </div>
   );
 };
