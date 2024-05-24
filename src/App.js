@@ -26,7 +26,11 @@ const App = () => {
             <Route path="/payment" element={<PaymentMethods />} />
             <Route path="/preferences" element={<Preferences />} />
             <Route path="/subscription" element={<Subscription />} />
-            <PrivateRoute path="/account" element={<Account />} />
+            <Route path="/account" element={
+              <PrivateRoute>
+                <Account />
+              </PrivateRoute>
+            } />
           </Routes>
         </div>
       </div>

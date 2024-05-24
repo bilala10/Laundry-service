@@ -1,21 +1,21 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AuthContext } from '../AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/auth/login', { email, password });
       login(res.data.token);
-      history.push('/account');
+      navigate('/account');
     } catch (err) {
       console.error(err);
       alert('Login failed. Please check your credentials.');
