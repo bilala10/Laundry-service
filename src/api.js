@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5002/api', // Ensure this is the correct URL for your backend
+  baseURL: 'https://ubiquitous-space-chainsaw-69pjgv4944634j4p-5002.app.github.dev/api', // Correct URL for your backend
 });
 
 // Add a request interceptor to include the token in headers
@@ -42,6 +42,16 @@ export const confirmPickup = async (orderDetails) => {
     return response.data;
   } catch (error) {
     console.error('Error confirming pickup', error);
+    throw error;
+  }
+};
+
+export const registerUser = async (userData) => {
+  try {
+    const response = await API.post('/auth/register', userData);
+    return response.data;
+  } catch (error) {
+    console.error('Error registering user', error);
     throw error;
   }
 };

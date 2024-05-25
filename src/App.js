@@ -8,7 +8,8 @@ import OrderForm from './components/OrderForm';
 import PaymentMethods from './components/PaymentMethods';
 import Preferences from './components/Preferences';
 import Subscription from './components/Subscription';
-import SignUp from './components/SignUp';
+import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
 import './App.css';
 
 const App = () => {
@@ -20,12 +21,16 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/order" element={<OrderForm />} />
             <Route path="/payment" element={<PaymentMethods />} />
             <Route path="/preferences" element={<Preferences />} />
             <Route path="/subscription" element={<Subscription />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/account" element={
+              <PrivateRoute>
+                <Account />
+              </PrivateRoute>
+            } />
           </Routes>
         </div>
       </div>

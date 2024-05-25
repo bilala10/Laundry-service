@@ -3,7 +3,7 @@ import SignUpStep1 from './SignUpStep1';
 import SignUpStep2 from './SignUpStep2';
 import SignUpStep3 from './SignUpStep3';
 import './SignUp.css';
-import axios from 'axios';
+import { registerUser } from '../api';
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
@@ -22,10 +22,10 @@ const SignUp = () => {
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
-
   const submitForm = async () => {
     try {
-      const response = await axios.post('http://localhost:5002/api/auth/register', {
+      console.log('Submitting form data:', formData);
+      const response = await registerUser({
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         password: formData.password,
@@ -33,14 +33,23 @@ const SignUp = () => {
         address: formData.address,
         aptNumber: formData.aptNumber,
         instructions: formData.instructions,
+        services: formData.services,
+        pickupDate: formData.pickupDate,
       });
-      if (response.data) {
-        alert('Order placed successfully!');
-        // Optionally, redirect to a different page or reset the form
-      }
+      console.log('User registered successfully:', response);
+      alert('Order placed successfully!');
     } catch (error) {
-      console.error('Error submitting form', error);
-      alert('There was an error placing your order. Please try again.');
+      console.error('There was an error registering the user:', error);
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        alert(`There was an error registering the user: ${error.response.data.message}`);
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+        alert('There was an error registering the user: No response received from the server.');
+      } else {
+        console.error('Error message:', error.message);
+        alert(`There was an error registering the user: ${error.message}`);
+      }
     }
   };
 
