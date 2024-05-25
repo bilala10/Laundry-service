@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import SignUpStep1 from './SignUpStep1';
 import SignUpStep2 from './SignUpStep2';
 import SignUpStep3 from './SignUpStep3';
@@ -19,38 +21,13 @@ const SignUp = () => {
     services: [],
     pickupDate: '',
   });
+  const navigate = useNavigate();
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
-  const submitForm = async () => {
-    try {
-      console.log('Submitting form data:', formData);
-      const response = await registerUser({
-        name: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email,
-        password: formData.password,
-        phone: formData.phoneNumber,
-        address: formData.address,
-        aptNumber: formData.aptNumber,
-        instructions: formData.instructions,
-        services: formData.services,
-        pickupDate: formData.pickupDate,
-      });
-      console.log('User registered successfully:', response);
-      alert('Order placed successfully!');
-    } catch (error) {
-      console.error('There was an error registering the user:', error);
-      if (error.response) {
-        console.error('Error response:', error.response.data);
-        alert(`There was an error registering the user: ${error.response.data.message}`);
-      } else if (error.request) {
-        console.error('Error request:', error.request);
-        alert('There was an error registering the user: No response received from the server.');
-      } else {
-        console.error('Error message:', error.message);
-        alert(`There was an error registering the user: ${error.message}`);
-      }
-    }
+  const submitForm = () => {
+    // Submit form logic here
+    alert('Order placed successfully!');
   };
 
   switch (step) {

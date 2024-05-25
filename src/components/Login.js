@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/login', { email, password });
+      const res = await axios.post('https://ubiquitous-space-chainsaw-69pjgv4944634j4p-5002.app.github.dev/api/auth/login', { email, password });
       login(res.data.token);
       navigate('/account');
     } catch (err) {
